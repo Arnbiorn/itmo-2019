@@ -1,5 +1,5 @@
 def filter_empty(sequence):
-    """Just function"""
+    """Just function."""
     return list(filter(
         lambda string: len(string),
         sequence,
@@ -7,7 +7,7 @@ def filter_empty(sequence):
 
 
 def test_delete():
-    """Just test_function"""
+    """Just test_function."""
     assert filter_empty([]) == []  # noqa: WPS520
     assert filter_empty(['']) == []  # noqa: WPS520
     assert filter_empty(['', '']) == []  # noqa: WPS520

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import glob # noqa: E902,E261
-import imp
-import os
+import glob # noqa: E902,E261, I001
+import imp  # noqa: I001
+import os  # noqa: I001
 
 extension = '.py'
 prefix = 'test_'
@@ -28,7 +28,7 @@ def find_test(module):
     """Return funcDict or none."""
     if module is None:
         return None
-    return dict(filter(lambda obj: obj[0].startswith(prefix), vars(module).items()))  # noqa: E501, WPS221, WPS110
+    return dict(filter(lambda obj: obj[0].startswith(prefix), vars(module).items()))  # noqa: E501, WPS221, WPS110, WPS421
 
 
 def validating_test(function):
