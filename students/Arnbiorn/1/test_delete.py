@@ -1,7 +1,10 @@
+# -*- coding: utf-8 -*-
+
+
 def filter_empty(sequence):
     """Just function."""
     return list(filter(
-        lambda string: len(string),
+        lambda string: len(string),  # noqa: WPS506
         sequence,
     ))
 
