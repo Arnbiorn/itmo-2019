@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 import shutil
 import unittest
@@ -5,52 +7,52 @@ import unittest
 import pytest
 import urllib3
 
-from itmo.second.cats_direct import (
+from cats_direct import (
     create_parser,
     fetch_cat_fact,
     fetch_cat_image,
     save_cat,
 )
 
-INDEX_STR = 'index'
-EXTENSION_STR = 'extension'
+index = 'index'
+extension = 'extension'
 
-class TestCatsDirect(unittest.TestCase):  # noqa WPS230
-    """cats_direct tester."""
+class Test_cat_direct(unittest.TestCase):  # noqa WPS230
+    """Tests for cats_direct."""
 
-    def setUp(self):
-        """Sets up reused data."""
-        self.test_file_data = {
-            INDEX_STR: 1010,
-            EXTENSION_STR: 'jpg',
+    def setup(self):
+        """Setups."""
+        self.test_date = {
+            index: 1010,
+            extension: 'jpg',
         }
-        self.test_cat_fact = 'Test cat fact'
+        self.test_fact = 'Test cat fact'
 
-        self.store_dirname = 'students/piechart/2/temp'
-        if (not os.path.exists(self.store_dirname)):
-            os.mkdir(self.store_dirname)
+        self.store_dir = 'students/Arnbiorn/2/'
+        if (not os.path.exists(self.store_dir)):
+            os.mkdir(self.store_dir)
 
-        self.test_fact_path = '{0}/cat_{1}_fact.txt'.format(
-            self.store_dirname,
-            self.test_file_data[INDEX_STR],
+        self.test_path = '{0}/cat_{1}_fact.txt'.format(
+            self.store_dir,
+            self.test_date[index],
         )
-        self.test_image_path = '{0}.{1}'.format(
-            'students/piechart/2/test_image',
-            self.test_file_data[EXTENSION_STR],
+        self.test_image = '{0}.{1}'.format(
+            'students/Arnbiorn/2/image',
+            self.test_date[extension],
         )
-        self.test_result_image_path = '{0}/cat_{1}_image.{2}'.format(
-            self.store_dirname,
-            self.test_file_data[INDEX_STR],
-            self.test_file_data[EXTENSION_STR],
+        self.test_imgResult = '{0}/cat_{1}_image.{2}'.format(
+            self.store_dir,
+            self.test_date[index],
+            self.test_date[extension],
         )
-        self.http_exception_text = 'HTTP exception raised'
+        self.http_exception = 'HTTP exception raised'
 
-    def tearDown(self):
-        """Cleanup."""
-        shutil.rmtree(self.store_dirname)
+    def tear(self):
+        """Cleaning."""
+        shutil.rmtree(self.store_dir)
 
     def test_parser(self):
-        """Tests arguments parsing."""
+        """Tests parsing."""
         test_args = ['--count', '3']
         parsed = create_parser().parse_args(test_args)
         self.assertEqual(parsed.count, int(test_args[-1]))
@@ -61,7 +63,7 @@ class TestCatsDirect(unittest.TestCase):  # noqa WPS230
         try:
             fact = fetch_cat_fact()
         except Exception:
-            self.fail(self.http_exception_text)
+            self.fail(self.http_exception)
 
         self.assertIs(type(fact), str)
         self.assertNotEqual(fact, '')
@@ -72,7 +74,7 @@ class TestCatsDirect(unittest.TestCase):  # noqa WPS230
         try:
             fetched = fetch_cat_image()
         except Exception:
-            self.fail(self.http_exception_text)
+            self.fail(self.http_exception)
 
         self.assertEqual(len(fetched), 2)
 
@@ -92,13 +94,13 @@ class TestCatsDirect(unittest.TestCase):  # noqa WPS230
 
     def test_save_cat(self):
         """Performs save_cat with test data and compares the result."""
-        self.assertTrue(os.path.isfile(self.test_image_path))
+        self.assertTrue(os.path.isfile(self.test_image))
 
-        with open(self.test_image_path, 'rb') as test_image:
+        with open(self.test_image, 'rb') as test_image:
             save_cat(
-                index=self.test_file_data[INDEX_STR],
-                fact=self.test_cat_fact,
-                image=(self.test_file_data[EXTENSION_STR], test_image),
+                index=self.test_date[index],
+                fact=self.test_fact,
+                image=(self.test_date[extension], test_image),
             )
 
 
