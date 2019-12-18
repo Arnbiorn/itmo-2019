@@ -7,10 +7,12 @@ prefix = 'test_'
 
 
 def search(directory, pattern):
+    """filepath list"""
     return glob.glob('{0}/{1}'.format(directory, pattern), recursive=True)
 
 
 def module_loading(file):
+    """return imported modules or none"""
     name = os.path.basename(file).replace(extension, '')
 
     if len(name) == 0 or (not os.path.exists(file)):
@@ -21,13 +23,15 @@ def module_loading(file):
 
 
 def find_test(module):
+    """return funcDict or none"""
     global prefix
     if module is None:
         return None
-    return dict(filter(lambda obj: obj[0].startswith(prefix), vars(module).items()))
+    return dict(filter(lambda obj: obj[0].startswith(prefix), vars(module).items()))  # noqa: E501
 
 
 def validating_test(function):
+    """check test_function"""
     try:
         function
     except AssertionError:
@@ -36,6 +40,7 @@ def validating_test(function):
 
 
 def testing(directorys=''):
+    """find test in dict, and check them"""
     if not directorys:
         directorys = os.getcwd()
 
@@ -47,4 +52,4 @@ def testing(directorys=''):
             print('{0}-{1}'.format(
                 files,
                 validating_test(tests[0]),
-            ))
+            ))  # noqa: T001
