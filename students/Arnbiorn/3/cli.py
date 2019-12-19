@@ -3,7 +3,7 @@
 import argparse  # noqa: I001
 import os
 import sys
-unknwn_command = 'unknown command'  # noqa: I003
+unknwn_command = 'Error! Unknown command!'  # noqa: I003
 
 
 def main(commands, module):
@@ -56,7 +56,7 @@ def rm(argument=None):
     if not os.path.exists(argument):
         return 'NOT_FOUND'
     os.remove(argument)
-    return 'ok'
+    return 'Ok'
 
 
 def contains(argument=None):
@@ -95,12 +95,12 @@ def since(timestamp, directory=os.getcwd()):  # noqa WPS404, B008
 
 def make_parser():
     """Argument parser."""
-    parser = argparse.argumentumentParser()
-    parser.add_argumentument('action', type=str, narguments='*', help='Action')
+    parser = argparse.ArgumentParser()
+    parser.add_argument('action', type=str, nargs='*', help='Action')
     return parser
 
 
 if __name__ == '__main__':
-    argumentuments = make_parser().parse_arguments()
+    arguments = make_parser().parse_args()
     current_module = sys.modules[__name__]
-    main(argumentuments.action, current_module)
+    main(arguments.action, current_module)

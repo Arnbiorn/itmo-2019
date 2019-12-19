@@ -10,7 +10,7 @@ empty_string = ''
 file_name = 'file.txt'
 point = '.'
 dirrectory = 'dir'
-error = 'ERROR! Wrong argument!'
+error = 'Error! Unknown command!'
 
 
 @pytest.fixture()
@@ -52,8 +52,8 @@ def mk_fixture(tmp_path, request):
 
 
 @pytest.fixture(params=[
-    (dirrectory, 'ARG_IS_DIR', True),
-    (file_name, 'FILE_NOT_FOUND', False),
+    (dirrectory, 'ARGUMENT_IS_DIR', True),
+    (file_name, 'NOT_FOUND', False),
     (empty_string, error, 'False'),
     (file_name, 'Ok', True),
 ])
@@ -71,7 +71,7 @@ def rm_fixture(tmp_path, request):
 @pytest.fixture(params=[
     (empty_string, error, False),
     (file_name, 0, True),
-    (dirrectory, 'ARG_IS_DIR', True),
+    (dirrectory, 'ARGUMENT_IS_DIR', True),
     (file_name, 1, False),
 ])
 def contains_fixture(request):
@@ -90,8 +90,8 @@ def contains_fixture(request):
 
 @pytest.fixture(params=[  # noqa C901
     ([None], error, False),
-    ([dirrectory], 'DIR_NOT_FOUND', False),
-    ([dirrectory], 'DIR_IS_EMPTY', True),
+    ([dirrectory], 'DIRECTORY_NOT_FOUND', False),
+    ([dirrectory], 'DIRECTORY_IS_EMPTY', True),
     (['dir/another dir'], ['another dir'], True),
     (['dir/file.txt'], [file_name], True),
     (['dir/subdir', 'dir/file.txt'], [file_name, 'subdir'], True),
