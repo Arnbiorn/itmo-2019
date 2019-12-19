@@ -36,7 +36,7 @@ class Test_cat_direct(unittest.TestCase):  # noqa WPS230
             self.store_dir,
             self.test_date[index],
         )
-        self.test_image = '{0}.{1}'.format(
+        self.test_image_path = '{0}.{1}'.format(
             'students/Arnbiorn/2/image',
             self.test_date[extension],
         )
@@ -94,9 +94,9 @@ class Test_cat_direct(unittest.TestCase):  # noqa WPS230
 
     def test_save_cat(self):
         """Performs save_cat result."""
-        self.assertTrue(os.path.isfile(self.test_image))
+        self.assertTrue(os.path.isfile(self.test_image_path))
 
-        with open(self.test_image, 'rb') as test_image:
+        with open(self.test_image_path, 'rb') as test_image:
             save_cat(
                 index=self.test_date[index],
                 fact=self.test_fact,
