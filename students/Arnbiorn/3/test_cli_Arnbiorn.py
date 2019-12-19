@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import subprocess
 
 from cli import contains, ls, mk, rm, since

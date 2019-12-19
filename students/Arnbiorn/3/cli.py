@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import argumentparse  # noqa: I001
 import os
 import sys
