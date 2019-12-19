@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import argumentparse  # noqa: I001
+import argparse  # noqa: I001
 import os
 import sys
 unknwn_command = 'unknown command'  # noqa: I003
@@ -95,7 +95,7 @@ def since(timestamp, directory=os.getcwd()):  # noqa WPS404, B008
 
 def make_parser():
     """Argument parser."""
-    parser = argumentparse.argumentumentParser()
+    parser = argparse.argumentumentParser()
     parser.add_argumentument('action', type=str, narguments='*', help='Action')
     return parser
 
