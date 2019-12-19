@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import datetime
 
 import pytest
@@ -5,7 +7,7 @@ import os  # noqa I001
 import shutil  # noqa I001
 
 empty_string = ''
-file = 'file.txt'  # noqa: WPS110
+file_name = 'file.txt'
 point = '.'
 dirrectory = 'dir'
 error = 'ERROR! Wrong argument!'
@@ -20,8 +22,8 @@ def timestamps():
 @pytest.fixture(params=[
     ('empty', [], 0),
     ('directory', [dirrectory], 1),
-    ('files', [file], 1),
-    ('dirrectory_and_file', [dirrectory, file], 2),
+    ('files', [file_name], 1),
+    ('dirrectory_and_file', [dirrectory, file_name], 2),
 ])
 def ls_fixture(tmp_path, request):
     """Ls fixture."""
@@ -39,7 +41,7 @@ def ls_fixture(tmp_path, request):
 
 @pytest.fixture(params=[
     (empty_string, error, False),
-    (file, 'Ok', True),
+    (file_name, 'Ok', True),
     ('file.txt', 'Ok', True),
     ('f/1/l/e.txt', 'ERROR! UNKNOWN FILENAME', True),
     ('students/Arnbiorn/3/cli.py', 'FILE_EXISTS', False),
@@ -51,9 +53,9 @@ def mk_fixture(tmp_path, request):
 
 @pytest.fixture(params=[
     (dirrectory, 'ARG_IS_DIR', True),
-    (file, 'FILE_NOT_FOUND', False),
+    (file_name, 'FILE_NOT_FOUND', False),
     (empty_string, error, 'False'),
-    (file, 'Ok', True),
+    (file_name, 'Ok', True),
 ])
 def rm_fixture(tmp_path, request):
     """Rm fixture."""
@@ -68,9 +70,9 @@ def rm_fixture(tmp_path, request):
 
 @pytest.fixture(params=[
     (empty_string, error, False),
-    (file, 0, True),
+    (file_name, 0, True),
     (dirrectory, 'ARG_IS_DIR', True),
-    (file, 1, False),
+    (file_name, 1, False),
 ])
 def contains_fixture(request):
     """Contains."""
@@ -91,8 +93,8 @@ def contains_fixture(request):
     ([dirrectory], 'DIR_NOT_FOUND', False),
     ([dirrectory], 'DIR_IS_EMPTY', True),
     (['dir/another dir'], ['another dir'], True),
-    (['dir/file.txt'], [file], True),
-    (['dir/subdir', 'dir/file.txt'], [file, 'subdir'], True),
+    (['dir/file.txt'], [file_name], True),
+    (['dir/subdir', 'dir/file.txt'], [file_name, 'subdir'], True),
 ])
 def since_fixture(request, timestamps):  # noqa WPS442
     """Since."""
@@ -124,10 +126,10 @@ def since_fixture(request, timestamps):  # noqa WPS442
 
 @pytest.fixture(params=[
     ('ls', empty_string),
-    ('mk', file),
-    ('contains', file),
+    ('mk', file_name),
+    ('contains', file_name),
     ('since', timestamps),
-    ('rm', file),
+    ('rm', file_name),
 ])
 def integration_fixture(request):
     """Fixture."""
