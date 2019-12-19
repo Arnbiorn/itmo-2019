@@ -20,7 +20,7 @@ extension = 'extension'
 class Test_cat_direct(unittest.TestCase):  # noqa WPS230
     """Tests for cats_direct."""
 
-    def setup(self):
+    def setUp(self):
         """Setups."""
         self.test_date = {
             index: 1010,
