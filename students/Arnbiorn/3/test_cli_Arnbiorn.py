@@ -25,7 +25,7 @@ def test_rm(rm_fixture):
 
 
 def test_contains(contains_fixture):
-    """Contains test function"""
+    """Contains test function."""
     path, result = contains_fixture  # noqa: WPS110
     assert contains(path) == result
 

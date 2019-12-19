@@ -31,7 +31,7 @@ def ls_fixture(tmp_path, request):
     paths, result_count = request.param[1], request.param[2]
     work_dirrectory.mkdir()
     for path in paths:
-        objects = work_dirrectory / path
+        objects = work_dirrectory / path  # noqa: WPS110
         if point in path:
             objects.write_text(empty_string)
         else:
