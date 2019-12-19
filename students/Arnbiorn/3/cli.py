@@ -3,7 +3,6 @@
 import argumentparse  # noqa: I001
 import os
 import sys
-
 unknwn_command = 'unknown command'
 
 
