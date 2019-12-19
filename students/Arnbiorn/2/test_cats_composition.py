@@ -5,42 +5,42 @@ import unittest
 
 import pytest
 
-from itmo.second import cats_composition
+import cats_composition
 
 
 class TestCatsComposition(unittest.TestCase):
-    """cats_composition tester."""
+    """Test for cats_composition."""
 
-    def setUp(self):
+    def setup(self):
         """Setup."""
-        self.temp_dir = 'temp'
-        self.test_file_amount = 1
+        self.dir = 'temp'
+        self.test_amount = 1
 
     @pytest.mark.remote_data
     def test_main(self):
         """Tests main."""
-        self.assertTrue(os.path.exists(self.temp_dir))
+        self.assertTrue(os.path.exists(self.dir))
 
-        fact_file = '{0}/cat_{1}_fact.txt'.format(
-            self.temp_dir,
-            self.test_file_amount,
+        fact = '{0}/cat_{1}_fact.txt'.format(
+            self.dir,
+            self.test_amount,
         )
-        if os.path.exists(fact_file):
-            os.remove(fact_file)
+        if os.path.exists(fact):
+            os.remove(fact)
 
-        cat_processor = cats_composition.CatProcessor(
+        cat_process = cats_composition.CatProcessor(
             cats_composition.fetch_cat_fact,
             cats_composition.fetch_cat_image,
             cats_composition.save_cat,
         )
         cats_composition.main(
-            self.test_file_amount,
-            process_cat=cat_processor,
+            self.test_amount,
+            process_cat=cat_process,
             show_information=print,  # noqa: T002
         )
 
-        self.assertTrue(os.path.exists(fact_file))
-        self.assertGreater(os.stat(fact_file).st_size, 0)
+        self.assertTrue(os.path.exists(fact))
+        self.assertGreater(os.stat(fact).st_size, 0)
 
 
 if __name__ == '__main__':

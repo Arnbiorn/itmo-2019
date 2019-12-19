@@ -51,15 +51,15 @@ class Test_cat_direct(unittest.TestCase):  # noqa WPS230
         """Cleaning."""
         shutil.rmtree(self.store_dir)
 
-    def test_parser(self):
+    def test_pars(self):
         """Tests parsing."""
         test_args = ['--count', '3']
         parsed = create_parser().parse_args(test_args)
         self.assertEqual(parsed.count, int(test_args[-1]))
 
     @pytest.mark.remote_data
-    def test_fetch_cat_fact(self):
-        """Tests cat fact fetched result."""
+    def test_fetch_fact(self):
+        """Tests fetched fact result."""
         try:
             fact = fetch_cat_fact()
         except Exception:
@@ -69,8 +69,8 @@ class Test_cat_direct(unittest.TestCase):  # noqa WPS230
         self.assertNotEqual(fact, '')
 
     @pytest.mark.remote_data
-    def test_fetch_cat_image(self):
-        """Tests cat image fetched result."""
+    def test_fetch_image(self):
+        """Tests fetched image result."""
         try:
             fetched = fetch_cat_image()
         except Exception:
@@ -93,7 +93,7 @@ class Test_cat_direct(unittest.TestCase):  # noqa WPS230
         self.assertGreater(int_content_length, 0)
 
     def test_save_cat(self):
-        """Performs save_cat with test data and compares the result."""
+        """Performs save_cat result."""
         self.assertTrue(os.path.isfile(self.test_image))
 
         with open(self.test_image, 'rb') as test_image:
