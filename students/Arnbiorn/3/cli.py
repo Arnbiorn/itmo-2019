@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import argumentparse
+import argumentparse  # noqa: I001
 import os
 import sys
 
@@ -28,7 +28,7 @@ def main(commands, module):
 def ls(argument=None):
     """ls."""
     directory = os.getcwd() if argument is None else argument
-    result = os.scandir(directory)
+    result = os.scandir(directory)  # noqa: WPS110
     filtered = filter(lambda zxc: zxc.is_file(), result)
     mapped = list(map(lambda zxc: zxc.name, filtered))
     dirs = [folder.name for folder in os.scandir(directory) if folder.is_dir()]
@@ -95,7 +95,7 @@ def since(timestamp, directory=os.getcwd()):  # noqa WPS404, B008
 
 
 def make_parser():
-    """argument parser."""
+    """Argument parser."""
     parser = argumentparse.argumentumentParser()
     parser.add_argumentument('action', type=str, narguments='*', help='Action')
     return parser

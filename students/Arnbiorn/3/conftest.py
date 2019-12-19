@@ -7,7 +7,7 @@ import os  # noqa I001
 import shutil  # noqa I001
 
 empty_string = ''
-file = 'file.txt'
+file = 'file.txt'  # noqa: WPS110
 point = '.'
 dirrectory = 'dir'
 error = 'ERROR! Wrong argument!'
@@ -26,7 +26,7 @@ def timestamps():
     ('dirrectory_and_file', [dirrectory, file], 2),
 ])
 def ls_fixture(tmp_path, request):
-    """ls fixture."""
+    """Ls fixture."""
     work_dirrectory = tmp_path / request.param[0]
     paths, result_count = request.param[1], request.param[2]
     work_dirrectory.mkdir()
@@ -47,7 +47,7 @@ def ls_fixture(tmp_path, request):
     ('students/Arnbiorn/3/cli.py', 'FILE_EXISTS', False),
 ])
 def mk_fixture(tmp_path, request):
-    """mk fixture."""
+    """Mk fixture."""
     yield request.param
 
 
@@ -58,7 +58,7 @@ def mk_fixture(tmp_path, request):
     (file, 'Ok', True),
 ])
 def rm_fixture(tmp_path, request):
-    """rm fixture."""
+    """Rm fixture."""
     path, expected_result, should_create = request.param
     final_path = path
     is_file = point in final_path
@@ -75,7 +75,7 @@ def rm_fixture(tmp_path, request):
     (file, 1, False),
 ])
 def contains_fixture(request):
-    """fixture contains."""
+    """Contains."""
     path, expected_result, should_create = request.param
     is_file = point in path
     if path and should_create:
