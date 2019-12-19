@@ -39,18 +39,18 @@ def mk(argument=None):
     if not argument:
         return unknwn_command
     if os.path.exists(argument):
-        return 'existing file'
+        return 'FILE_EXISTS'
     try:
         open(argument, 'a').close()  # noqa WPS515
     except OSError:
-        return 'WRONG_FILENAME'
+        return 'ERROR! UNKNOWN FILENAME'
     return 'Ok'
 
 
 def rm(argument=None):
     """rm."""
     if not argument:
-        return 'unknwn_command'
+        return 'Error! Unknown command!'
     if os.path.isdir(argument):
         return 'ARGUMENT_IS_DIR'
     if not os.path.exists(argument):
